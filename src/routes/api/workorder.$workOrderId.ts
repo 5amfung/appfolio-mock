@@ -7,11 +7,14 @@ export const Route = createFileRoute('/api/workorder/$workOrderId')({
     middleware: [requestLogger],
     handlers: {
       GET: async ({ params }) => {
+        // Simulate real world delay.
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
         const workOrder = workOrders.find((w) => w.id === params.workOrderId);
         if (!workOrder)
           return Response.json(
             { error: 'Work order not found' },
-            { status: 404 }
+            { status: 404 },
           );
         return Response.json(workOrder);
       },

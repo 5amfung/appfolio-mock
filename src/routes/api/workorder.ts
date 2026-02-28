@@ -16,6 +16,9 @@ export const Route = createFileRoute('/api/workorder')({
     middleware: [requestLogger],
     handlers: {
       GET: async ({ request }) => {
+        // Simulate real world delay.
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
         const url = new URL(request.url);
         const phone = url.searchParams.get('phone');
         const list = phone
@@ -23,12 +26,15 @@ export const Route = createFileRoute('/api/workorder')({
           : [...workOrders];
         const sorted = [...list].sort(
           (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
         );
         return Response.json(sorted);
       },
 
       POST: async ({ request }) => {
+        // Simulate real world delay.
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
         let body: unknown;
         try {
           body = await request.json();

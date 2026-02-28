@@ -7,6 +7,9 @@ export const Route = createFileRoute('/api/tenant/$tenantId')({
     middleware: [requestLogger],
     handlers: {
       GET: async ({ params }) => {
+        // Simulate real world delay.
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
         const tenant = TENANTS.find((t) => t.id === params.tenantId);
         if (!tenant)
           return Response.json({ error: 'Tenant not found' }, { status: 404 });

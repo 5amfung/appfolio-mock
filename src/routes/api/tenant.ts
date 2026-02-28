@@ -7,6 +7,9 @@ export const Route = createFileRoute('/api/tenant')({
     middleware: [requestLogger],
     handlers: {
       GET: async ({ request }) => {
+        // Simulate real world delay.
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
         const url = new URL(request.url);
         const phone = url.searchParams.get('phone');
         if (phone) {
@@ -14,7 +17,7 @@ export const Route = createFileRoute('/api/tenant')({
           if (!tenant)
             return Response.json(
               { error: 'Tenant not found' },
-              { status: 404 }
+              { status: 404 },
             );
           return Response.json(tenant);
         }
