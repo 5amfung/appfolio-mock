@@ -1,8 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { TENANTS } from '~/data/tenants';
+import { requestLogger } from '~/utils/requestLogger';
 
 export const Route = createFileRoute('/api/tenant/$tenantId')({
   server: {
+    middleware: [requestLogger],
     handlers: {
       GET: async ({ params }) => {
         const tenant = TENANTS.find((t) => t.id === params.tenantId);

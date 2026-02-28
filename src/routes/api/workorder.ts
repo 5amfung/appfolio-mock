@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { z } from 'zod';
 import { type WorkOrder, workOrders } from '~/data/workOrders';
+import { requestLogger } from '~/utils/requestLogger';
 
 const CreateWorkOrderSchema = z.object({
   tenantName: z.string().min(1),
@@ -12,6 +13,7 @@ const CreateWorkOrderSchema = z.object({
 
 export const Route = createFileRoute('/api/workorder')({
   server: {
+    middleware: [requestLogger],
     handlers: {
       GET: async ({ request }) => {
         const url = new URL(request.url);
