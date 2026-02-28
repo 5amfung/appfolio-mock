@@ -7,7 +7,10 @@
     "dev": "vite dev",
     "build": "vite build && tsc --noEmit",
     "preview": "vite preview",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "lint": "biome lint",
+    "format": "biome format --write",
+    "check": "biome check --write"
   },
   "dependencies": {
     "@tanstack/react-router": "^1.163.2",
@@ -19,6 +22,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.4",
     "@tailwindcss/vite": "^4.1.18",
     "@types/node": "^22.5.4",
     "@types/react": "^19.0.8",

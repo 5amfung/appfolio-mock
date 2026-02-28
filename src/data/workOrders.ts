@@ -1,14 +1,14 @@
-export type WorkOrderProgress = 'new' | 'in-progress' | 'completed'
+export type WorkOrderProgress = 'new' | 'in-progress' | 'completed';
 
 export interface WorkOrder {
-  id: string
-  tenantName: string
-  tenantAddress: string
-  tenantPhone: string
-  tenantUnitNumber?: string
-  description: string
-  progress: WorkOrderProgress
-  createdAt: string
+  id: string;
+  tenantName: string;
+  tenantAddress: string;
+  tenantPhone: string;
+  tenantUnitNumber?: string;
+  description: string;
+  progress: WorkOrderProgress;
+  createdAt: string;
 }
 
 // In-memory store — resets on server restart (POC)
@@ -38,7 +38,8 @@ export const workOrders: WorkOrder[] = [
     tenantAddress: '300 Pine Road',
     tenantPhone: '4155551003',
     tenantUnitNumber: '2B',
-    description: 'Bathroom ceiling has water stain and possible leak from upstairs.',
+    description:
+      'Bathroom ceiling has water stain and possible leak from upstairs.',
     progress: 'completed',
     createdAt: '2025-01-20T11:00:00.000Z',
   },
@@ -57,7 +58,8 @@ export const workOrders: WorkOrder[] = [
     tenantAddress: '500 Cedar Lane',
     tenantPhone: '4155551005',
     tenantUnitNumber: '3C',
-    description: 'Garbage disposal stopped working — makes no sound when switched on.',
+    description:
+      'Garbage disposal stopped working — makes no sound when switched on.',
     progress: 'in-progress',
     createdAt: '2025-02-08T10:15:00.000Z',
   },
@@ -66,7 +68,8 @@ export const workOrders: WorkOrder[] = [
     tenantName: 'Frank Garcia',
     tenantAddress: '600 Birch Boulevard',
     tenantPhone: '4155551006',
-    description: 'Bedroom window won\'t close all the way — gap lets in cold air.',
+    description:
+      "Bedroom window won't close all the way — gap lets in cold air.",
     progress: 'in-progress',
     createdAt: '2025-02-14T13:45:00.000Z',
   },
@@ -85,7 +88,8 @@ export const workOrders: WorkOrder[] = [
     tenantName: 'Henry Taylor',
     tenantAddress: '800 Chestnut Place',
     tenantPhone: '4155551008',
-    description: 'Smoke detector chirping intermittently — battery replacement needed.',
+    description:
+      'Smoke detector chirping intermittently — battery replacement needed.',
     progress: 'new',
     createdAt: '2025-02-22T16:30:00.000Z',
   },
@@ -108,4 +112,4 @@ export const workOrders: WorkOrder[] = [
     progress: 'new',
     createdAt: '2025-02-27T08:45:00.000Z',
   },
-]
+];

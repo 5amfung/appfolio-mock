@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { TENANTS } from '~/data/tenants';
 
-export const Route = createFileRoute('/api/tenant')({
+export const Route = createFileRoute('/api/verify-identity')({
   server: {
     handlers: {
       GET: async ({ request }) => {
@@ -14,9 +14,9 @@ export const Route = createFileRoute('/api/tenant')({
               { error: 'Tenant not found' },
               { status: 404 }
             );
-          return Response.json(tenant);
+          return Response.json({ result: 'verified' });
         }
-        return Response.json(TENANTS);
+        return Response.json({ error: 'Missing phone number' });
       },
     },
   },
