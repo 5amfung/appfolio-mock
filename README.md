@@ -65,7 +65,7 @@ Example — create a work order:
 ```sh
 curl -X POST http://localhost:3000/api/workorder \
   -H "Content-Type: application/json" \
-  -d '{"tenantName":"Jane Doe","tenantAddress":"123 Main St","tenantPhone":"555-1234","description":"Leak under sink"}'
+  -d '{"tenantName":"Alice Johnson","tenantAddress":"100 Oak Street","tenantPhone":"4155551001","description":"Leak under sink"}'
 ```
 
 ## Scripts
