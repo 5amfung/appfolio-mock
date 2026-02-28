@@ -30,14 +30,14 @@ function AppLayout() {
                 <TabsTrigger
                   value="work-orders"
                   asChild
-                  className="min-w-[8rem] rounded-md px-4 py-2 text-sm font-medium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
+                  className="min-w-32 rounded-md px-4 py-2 text-sm font-medium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
                 >
                   <Link to="/work-orders">Work Orders</Link>
                 </TabsTrigger>
                 <TabsTrigger
                   value="tenants"
                   asChild
-                  className="min-w-[8rem] rounded-md px-4 py-2 text-sm font-medium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
+                  className="min-w-32 rounded-md px-4 py-2 text-sm font-medium data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm"
                 >
                   <Link to="/tenants">Tenants</Link>
                 </TabsTrigger>
