@@ -109,7 +109,7 @@ export const workOrders: WorkOrder[] = [
     tenantAddress: '1000 Willow Street',
     tenantPhone: '4155551010',
     description: 'AC unit making loud rattling noise when running.',
-    progress: 'new',
+    progress: 'completed',
     createdAt: '2025-02-27T08:45:00.000Z',
   },
 ];
