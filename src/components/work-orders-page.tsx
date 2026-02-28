@@ -86,6 +86,7 @@ export function WorkOrdersPage() {
   const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ['workorders'] as const,
     queryFn: fetchWorkOrders,
+    refetchInterval: 30_000, // 30 seconds in ms
   });
 
   if (isLoading) {
