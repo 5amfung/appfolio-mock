@@ -10,33 +10,87 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiWorkorderRouteImport } from './routes/api/workorder'
+import { Route as ApiTenantRouteImport } from './routes/api/tenant'
+import { Route as ApiWorkorderWorkOrderIdRouteImport } from './routes/api/workorder.$workOrderId'
+import { Route as ApiTenantTenantIdRouteImport } from './routes/api/tenant.$tenantId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiWorkorderRoute = ApiWorkorderRouteImport.update({
+  id: '/api/workorder',
+  path: '/api/workorder',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiTenantRoute = ApiTenantRouteImport.update({
+  id: '/api/tenant',
+  path: '/api/tenant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWorkorderWorkOrderIdRoute = ApiWorkorderWorkOrderIdRouteImport.update({
+  id: '/$workOrderId',
+  path: '/$workOrderId',
+  getParentRoute: () => ApiWorkorderRoute,
+} as any)
+const ApiTenantTenantIdRoute = ApiTenantTenantIdRouteImport.update({
+  id: '/$tenantId',
+  path: '/$tenantId',
+  getParentRoute: () => ApiTenantRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/tenant': typeof ApiTenantRouteWithChildren
+  '/api/workorder': typeof ApiWorkorderRouteWithChildren
+  '/api/tenant/$tenantId': typeof ApiTenantTenantIdRoute
+  '/api/workorder/$workOrderId': typeof ApiWorkorderWorkOrderIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/tenant': typeof ApiTenantRouteWithChildren
+  '/api/workorder': typeof ApiWorkorderRouteWithChildren
+  '/api/tenant/$tenantId': typeof ApiTenantTenantIdRoute
+  '/api/workorder/$workOrderId': typeof ApiWorkorderWorkOrderIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/tenant': typeof ApiTenantRouteWithChildren
+  '/api/workorder': typeof ApiWorkorderRouteWithChildren
+  '/api/tenant/$tenantId': typeof ApiTenantTenantIdRoute
+  '/api/workorder/$workOrderId': typeof ApiWorkorderWorkOrderIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/api/tenant'
+    | '/api/workorder'
+    | '/api/tenant/$tenantId'
+    | '/api/workorder/$workOrderId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/api/tenant'
+    | '/api/workorder'
+    | '/api/tenant/$tenantId'
+    | '/api/workorder/$workOrderId'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/tenant'
+    | '/api/workorder'
+    | '/api/tenant/$tenantId'
+    | '/api/workorder/$workOrderId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiTenantRoute: typeof ApiTenantRouteWithChildren
+  ApiWorkorderRoute: typeof ApiWorkorderRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +102,65 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/workorder': {
+      id: '/api/workorder'
+      path: '/api/workorder'
+      fullPath: '/api/workorder'
+      preLoaderRoute: typeof ApiWorkorderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/tenant': {
+      id: '/api/tenant'
+      path: '/api/tenant'
+      fullPath: '/api/tenant'
+      preLoaderRoute: typeof ApiTenantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/workorder/$workOrderId': {
+      id: '/api/workorder/$workOrderId'
+      path: '/$workOrderId'
+      fullPath: '/api/workorder/$workOrderId'
+      preLoaderRoute: typeof ApiWorkorderWorkOrderIdRouteImport
+      parentRoute: typeof ApiWorkorderRoute
+    }
+    '/api/tenant/$tenantId': {
+      id: '/api/tenant/$tenantId'
+      path: '/$tenantId'
+      fullPath: '/api/tenant/$tenantId'
+      preLoaderRoute: typeof ApiTenantTenantIdRouteImport
+      parentRoute: typeof ApiTenantRoute
+    }
   }
 }
 
+interface ApiTenantRouteChildren {
+  ApiTenantTenantIdRoute: typeof ApiTenantTenantIdRoute
+}
+
+const ApiTenantRouteChildren: ApiTenantRouteChildren = {
+  ApiTenantTenantIdRoute: ApiTenantTenantIdRoute,
+}
+
+const ApiTenantRouteWithChildren = ApiTenantRoute._addFileChildren(
+  ApiTenantRouteChildren,
+)
+
+interface ApiWorkorderRouteChildren {
+  ApiWorkorderWorkOrderIdRoute: typeof ApiWorkorderWorkOrderIdRoute
+}
+
+const ApiWorkorderRouteChildren: ApiWorkorderRouteChildren = {
+  ApiWorkorderWorkOrderIdRoute: ApiWorkorderWorkOrderIdRoute,
+}
+
+const ApiWorkorderRouteWithChildren = ApiWorkorderRoute._addFileChildren(
+  ApiWorkorderRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiTenantRoute: ApiTenantRouteWithChildren,
+  ApiWorkorderRoute: ApiWorkorderRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

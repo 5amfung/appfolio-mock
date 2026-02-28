@@ -1,0 +1,54 @@
+import { createFileRoute } from '@tanstack/react-router'
+import { z } from 'zod'
+import { workOrders, type WorkOrder } from '~/data/workOrders'
+
+const CreateWorkOrderSchema = z.object({
+  tenantName: z.string().min(1),
+  tenantAddress: z.string().min(1),
+  tenantPhone: z.string().min(1),
+  tenantUnitNumber: z.string().optional(),
+  description: z.string().min(1),
+})
+
+export const Route = createFileRoute('/api/workorder')({
+  server: {
+    handlers: {
+      GET: async ({ request }) => {
+        const url = new URL(request.url)
+        const phone = url.searchParams.get('phone')
+        const list = phone ? workOrders.filter((wo) => wo.tenantPhone === phone) : [...workOrders]
+        const sorted = [...list].sort(
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        )
+        return Response.json(sorted)
+      },
+
+      POST: async ({ request }) => {
+        let body: unknown
+        try {
+          body = await request.json()
+        } catch {
+          return Response.json({ error: 'Invalid JSON body' }, { status: 400 })
+        }
+
+        const result = CreateWorkOrderSchema.safeParse(body)
+        if (!result.success) {
+          return Response.json(
+            { error: 'Validation failed', issues: result.error.issues },
+            { status: 400 },
+          )
+        }
+
+        const newWorkOrder: WorkOrder = {
+          id: crypto.randomUUID(),
+          ...result.data,
+          progress: 'new',
+          createdAt: new Date().toISOString(),
+        }
+
+        workOrders.push(newWorkOrder)
+        return Response.json(newWorkOrder, { status: 201 })
+      },
+    },
+  },
+})
