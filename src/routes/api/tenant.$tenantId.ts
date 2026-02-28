@@ -8,7 +8,7 @@ export const Route = createFileRoute('/api/tenant/$tenantId')({
     handlers: {
       GET: async ({ params }) => {
         // Simulate real world delay.
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         const tenant = TENANTS.find((t) => t.id === params.tenantId);
         if (!tenant)

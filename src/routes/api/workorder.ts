@@ -17,7 +17,7 @@ export const Route = createFileRoute('/api/workorder')({
     handlers: {
       GET: async ({ request }) => {
         // Simulate real world delay.
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         const url = new URL(request.url);
         const phone = url.searchParams.get('phone');
@@ -33,7 +33,7 @@ export const Route = createFileRoute('/api/workorder')({
 
       POST: async ({ request }) => {
         // Simulate real world delay.
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 600));
 
         let body: unknown;
         try {

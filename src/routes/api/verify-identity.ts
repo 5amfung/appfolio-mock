@@ -8,7 +8,7 @@ export const Route = createFileRoute('/api/verify-identity')({
     handlers: {
       GET: async ({ request }) => {
         // Simulate real world delay.
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         const url = new URL(request.url);
         const phone = url.searchParams.get('phone');

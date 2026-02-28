@@ -8,7 +8,7 @@ export const Route = createFileRoute('/api/workorder/$workOrderId')({
     handlers: {
       GET: async ({ params }) => {
         // Simulate real world delay.
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         const workOrder = workOrders.find((w) => w.id === params.workOrderId);
         if (!workOrder)
