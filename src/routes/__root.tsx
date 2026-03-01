@@ -43,6 +43,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           color: '#1c1917',
         }}
       >
+        <elevenlabs-convai agent-id="agent_3001kjm0751kfwwsenpwywxqh69j"></elevenlabs-convai>
+        <script
+          src="https://unpkg.com/@elevenlabs/convai-widget-embed"
+          async
+          type="text/javascript"
+        ></script>
+
         <QueryClientProvider client={queryClient}>
           {children}
         </QueryClientProvider>
